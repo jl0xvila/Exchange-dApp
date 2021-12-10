@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 import Web3 from 'web3'
 import { connect } from 'react-redux'
-import { loadWeb3, loadAcccount, loadToken } from '../store/interactions'
+import { 
+  loadWeb3,
+  loadAcccount,
+  loadToken,
+  loadExchange
+} from '../store/interactions'
 
 class App extends Component {
   componentWillMount() {
@@ -15,6 +20,7 @@ class App extends Component {
     const networkId = await web3.eth.net.getId()
     const accounts = await loadAcccount(web3, dispatch)
     const token = await loadToken(web3, networkId, dispatch)
+    loadExchange(web3, networkId, dispatch)
   }
 
   render() {
